@@ -1,0 +1,76 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Resolve site paths
+        id: paths
+        env:
+          OVERRIDE: ${{ vars.BASE_PATH }}
+          PAGES_PATH: ${{ steps.pages.outputs.base_path }}
+          PAGES_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          BASE="${OVERRIDE:-$PAGES_PATH}"
+          BASE="${BASE%/}"
+          if [ "$BASE" = "/" ]; then BASE=""; fi
+          echo "base_path=$BASE" >> "$GITHUB_OUTPUT"
+          echo "site_url=$PAGES_URL" >> "$GITHUB_OUTPUT"
+          echo "Publishing at ${PAGES_URL} (base path '${BASE}')."
+
+      - name: Build static site
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.paths.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.paths.outputs.site_url }}
+          NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.WEB3FORMS_ACCESS_KEY }}
+        run: |
+          npm run brand
+          npm run build
+          npm run check:size
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

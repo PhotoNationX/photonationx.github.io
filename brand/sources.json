@@ -1,0 +1,15 @@
+{
+  "logo": {
+    "file": "logo.png",
+    "lens": {
+      "pixelFingerprint": "eb08609a59da3beb",
+      "centerX": 540,
+      "centerY": 619,
+      "radius": 109,
+      "glassRadius": 90
+    }
+  },
+  "banner": {
+    "file": "collage.webp"
+  }
+}

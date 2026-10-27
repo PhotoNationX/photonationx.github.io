@@ -1,0 +1,64 @@
+{
+  "name": "Photo NationX",
+  "url": "https://photonationx.github.io",
+  "description": "Photos and videos by Photo NationX. Browse the galleries and get in touch to book a session.",
+  "header": {
+    "logo": "clean",
+    "nav": [
+      {
+        "label": "Photos",
+        "href": "/photos/"
+      },
+      {
+        "label": "Videos",
+        "href": "/videos/"
+      },
+      {
+        "label": "About",
+        "href": "/about/"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact/"
+      }
+    ]
+  },
+  "banner": {
+    "style": "grid",
+    "alt": "The Photo NationX logo at the center of a collage of portrait, fashion, and wedding photographs",
+    "gridPhotos": [
+      "5ce419de3c9c",
+      "decd3af64030",
+      "bff3cbdf8ec8",
+      "59420636f784",
+      "f36aff92f4ff",
+      "3a5e335391c9",
+      "22310bb32b07",
+      "d67d0baac752"
+    ]
+  },
+  "home": {
+    "eyebrow": "Photography & video",
+    "heading": "Photos and videos by Photo NationX",
+    "intro": "Browse the galleries, watch the latest videos, and get in touch to plan a session."
+  },
+  "about": {
+    "heading": "About Photo NationX",
+    "paragraphs": [
+      "Photo NationX is a photography and video portfolio.",
+      "A fuller introduction is on the way. Until then, the galleries show the work, and the contact form is the best way to ask about a shoot."
+    ]
+  },
+  "contact": {
+    "heading": "Contact & booking",
+    "intro": "Ask about a booking, a print, or anything else. Replies come by email.",
+    "web3formsAccessKey": "",
+    "subject": "New message from the Photo NationX website"
+  },
+  "display": {
+    "captions": false,
+    "dates": false,
+    "photoTileAspect": "4/5"
+  },
+  "photoCategories": []
+}

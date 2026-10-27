@@ -1,0 +1,105 @@
+name: Add photos and videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      category:
+        description: Optional category name for new photos
+        required: false
+        type: string
+      links:
+        description: YouTube or Vimeo links, separated by spaces
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install media tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg libheif-examples
+
+      - name: Download draft release uploads
+        id: drafts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/draft-uploads.mjs download .incoming
+
+      - name: Add media
+        env:
+          CATEGORY: ${{ inputs.category }}
+          LINKS: ${{ inputs.links }}
+          FOUND: ${{ steps.drafts.outputs.found }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ -n "${CATEGORY}" ]; then
+            args+=(--category "$CATEGORY")
+          fi
+          if [ -n "${LINKS}" ]; then
+            args+=(--link "$LINKS")
+          fi
+          if [ "$FOUND" = "true" ]; then
+            node scripts/add-media.mjs .incoming "${args[@]}"
+          elif [ "${#args[@]}" -gt 0 ]; then
+            node scripts/add-media.mjs "${args[@]}"
+          else
+            echo "Nothing to add. Attach files to a draft release, or pass video links, then run this again."
+            exit 1
+          fi
+
+      - name: Commit media
+        id: commit
+        run: |
+          set -euo pipefail
+          git config user.name "Photo NationX"
+          git config user.email "photonationx@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Nothing new to commit."
+          else
+            git commit -m "Add photos and videos"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Delete draft releases
+        if: success() && steps.drafts.outputs.found == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/draft-uploads.mjs delete .incoming
+
+  deploy:
+    needs: add
+    if: needs.add.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

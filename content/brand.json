@@ -1,0 +1,60 @@
+{
+  "logo": {
+    "width": 1237,
+    "height": 308,
+    "variants": {
+      "original": [
+        {
+          "src": "/brand/logo-320.webp",
+          "width": 320
+        },
+        {
+          "src": "/brand/logo-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/brand/logo-960.webp",
+          "width": 960
+        }
+      ],
+      "clean": [
+        {
+          "src": "/brand/logo-clean-320.webp",
+          "width": 320
+        },
+        {
+          "src": "/brand/logo-clean-640.webp",
+          "width": 640
+        },
+        {
+          "src": "/brand/logo-clean-960.webp",
+          "width": 960
+        }
+      ]
+    }
+  },
+  "banner": {
+    "width": 1125,
+    "height": 642,
+    "color": "#080808",
+    "sources": [
+      {
+        "src": "/brand/banner-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/brand/banner-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/brand/banner-1125.webp",
+        "width": 1125
+      }
+    ],
+    "ogImage": {
+      "src": "/brand/og-image.jpg",
+      "width": 1200,
+      "height": 630
+    }
+  }
+}
