@@ -2,9 +2,9 @@
 
 Static photography portfolio for Photo NationX. It is meant to be published free on GitHub Pages at [https://photonationx.github.io](https://photonationx.github.io), with no custom domain.
 
-The home page opens with the collage banner. Photos are a thumbnail grid that opens a larger view. Videos are posters that play when selected. About and contact are separate pages. The contact form sends mail through Web3Forms and needs no server of its own.
+The home page opens with a grid of photographs and the logo in the center. Photos are a thumbnail grid that opens a larger view. Videos are posters that play when selected. About and contact are separate pages. The contact form sends mail through Web3Forms and needs no server of its own.
 
-Sample images fill the galleries so the pages can be reviewed before a real library is imported. Importing replaces them.
+The galleries are the imported photographs and videos. Importing again replaces them.
 
 ## Run locally
 
