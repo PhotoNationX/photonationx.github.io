@@ -86,12 +86,7 @@ export function ContactForm({
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      action={accessKey ? undefined : `https://formsubmit.co/${encodeURIComponent(email)}`}
-      method="POST"
-      className="grid gap-5"
-    >
+    <form onSubmit={onSubmit} className="grid gap-5">
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
         <label>
           Leave this field empty
@@ -121,7 +116,7 @@ export function ContactForm({
       </div>
       {status === "error" ? (
         <p className="text-sm text-brand-red" role="alert">
-          The message could not be sent. Please try again, or email {email} directly.
+          The message could not be sent. Please try again in a moment.
         </p>
       ) : null}
       <Button type="submit" size="lg" disabled={status === "submitting"} className="h-11 w-fit px-5 hover:bg-brand-red">
