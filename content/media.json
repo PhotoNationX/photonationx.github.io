@@ -2841,17 +2841,6 @@
       "source": "instagram"
     },
     {
-      "id": "a8f26d3cd09e",
-      "width": 488,
-      "height": 488,
-      "widths": [
-        400,
-        488
-      ],
-      "color": "#080808",
-      "source": "instagram"
-    },
-    {
       "id": "38c10b3c38e6",
       "width": 1440,
       "height": 1440,
@@ -3265,19 +3254,6 @@
         1440
       ],
       "color": "#a89888",
-      "source": "instagram"
-    },
-    {
-      "id": "7493416fca1a",
-      "width": 1440,
-      "height": 1439,
-      "widths": [
-        400,
-        800,
-        1200,
-        1440
-      ],
-      "color": "#98a8b8",
       "source": "instagram"
     },
     {
@@ -11334,18 +11310,6 @@
       "source": "instagram"
     },
     {
-      "id": "73de5d833ce6",
-      "width": 1080,
-      "height": 720,
-      "widths": [
-        400,
-        800,
-        1080
-      ],
-      "color": "#485868",
-      "source": "instagram"
-    },
-    {
       "id": "9d963c211a92",
       "width": 1080,
       "height": 720,
@@ -13841,18 +13805,6 @@
       "source": "instagram"
     },
     {
-      "id": "a5ff4d964431",
-      "width": 1080,
-      "height": 565,
-      "widths": [
-        400,
-        800,
-        1080
-      ],
-      "color": "#c8c8c8",
-      "source": "instagram"
-    },
-    {
       "id": "04c7c7eb7527",
       "width": 1080,
       "height": 855,
@@ -14378,30 +14330,6 @@
         1000
       ],
       "color": "#888888",
-      "source": "instagram"
-    },
-    {
-      "id": "3d0c64f9e5d8",
-      "width": 1080,
-      "height": 604,
-      "widths": [
-        400,
-        800,
-        1080
-      ],
-      "color": "#080808",
-      "source": "instagram"
-    },
-    {
-      "id": "5e4b5972bf01",
-      "width": 1080,
-      "height": 720,
-      "widths": [
-        400,
-        800,
-        1080
-      ],
-      "color": "#b8b8c8",
       "source": "instagram"
     },
     {
@@ -15108,22 +15036,6 @@
       "source": "instagram"
     },
     {
-      "id": "ff1cbf23e100",
-      "kind": "file",
-      "width": 720,
-      "height": 900,
-      "duration": 60,
-      "bytes": 8085414,
-      "poster": {
-        "widths": [
-          360,
-          720
-        ],
-        "color": "#f8f8f8"
-      },
-      "source": "instagram"
-    },
-    {
       "id": "eceb9a0c72fc",
       "kind": "file",
       "width": 720,
@@ -15248,22 +15160,6 @@
           720
         ],
         "color": "#6898b8"
-      },
-      "source": "instagram"
-    },
-    {
-      "id": "a38bb3ec2f3a",
-      "kind": "file",
-      "width": 720,
-      "height": 406,
-      "duration": 47.9,
-      "bytes": 2850089,
-      "poster": {
-        "widths": [
-          360,
-          720
-        ],
-        "color": "#a89898"
       },
       "source": "instagram"
     },
