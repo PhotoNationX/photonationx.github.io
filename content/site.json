@@ -43,15 +43,41 @@
     "intro": "Browse the galleries, watch the latest videos, and get in touch to plan a session."
   },
   "about": {
-    "heading": "About Photo NationX",
+    "heading": "About me",
     "paragraphs": [
-      "Photo NationX is a photography and video portfolio.",
-      "A fuller introduction is on the way. Until then, the galleries show the work, and the contact form is the best way to ask about a shoot."
+      "I'm Edner Emmanuel, founder of Photo NationX. I photograph and film the moments people want to keep, and I help turn an idea into something they can see.",
+      "I started as a kid with a camera at my hip. Parties, dance shows, birthdays, vacations. If friends or family were there, I was there to catch it. The joy on their faces is what made me decide to go pro.",
+      "The beginning was hard. Nobody wanted to hire a photographer without a portfolio, so I spent about three years shooting for free while I taught myself, course by course and job by job. The first wedding that paid me was a full day, two venues, and a couple hundred guests. Most of that fee went to the people helping me shoot and edit. I took the job anyway, because I needed the work to exist.",
+      "Word of mouth did the rest. I got serious about the craft and about getting the pictures and video back while the moment was still fresh, sometimes thousands of photos and an edited film before a couple came home from the honeymoon. That is still how I work. Photo NationX is portraits, events, marketing, and film, built by learning the job and not giving up."
+    ],
+    "press": [
+      {
+        "publication": "Shoutout Colorado",
+        "title": "Meet Edner Emmanuel",
+        "date": "October 2022",
+        "href": "https://shoutoutcolorado.com/meet-edner-emmanuel-marketing-content-creator-film-editor/"
+      },
+      {
+        "publication": "Voyage Denver",
+        "title": "Hidden Gems: Photo NationX",
+        "href": "https://voyagedenver.com/interview/hidden-gems-meet-edner-emmanuel-of-photo-nationx/"
+      }
+    ],
+    "links": [
+      {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@photonationx7403"
+      },
+      {
+        "label": "Vero",
+        "href": "https://vero.co/photonationx"
+      }
     ]
   },
   "contact": {
     "heading": "Contact & booking",
-    "intro": "Ask about a booking, a print, or anything else. Replies come by email.",
+    "intro": "Ask about a booking, a print, or anything else.",
+    "email": "photonationx@gmail.com",
     "web3formsAccessKey": "",
     "subject": "New message from the Photo NationX website"
   },

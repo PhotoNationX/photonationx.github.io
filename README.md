@@ -80,9 +80,9 @@ Replace `brand/logo.png` or `brand/collage.webp`, then run `npm run brand` again
 
 ## Contact form
 
-The form posts to Web3Forms with a honeypot field. Put the access key in `contact.web3formsAccessKey`, or set a repository variable named `WEB3FORMS_ACCESS_KEY`. The deploy workflow passes that variable through, and it overrides the file. The key is safe to ship in the static site; it only lets the form send mail. Do not put an email address in the pages or the code.
+The contact page lists the Photo NationX email. The form also posts to Web3Forms with a honeypot field. Put the access key in `contact.web3formsAccessKey`, or set a repository variable named `WEB3FORMS_ACCESS_KEY`. The deploy workflow passes that variable through, and it overrides the file. The key is safe to ship in the static site; it only lets the form send mail.
 
-Until a key is set, the contact page says the form is not available yet.
+Until a key is set, the contact page says the form is not connected yet and points people to the email.
 
 ## Deploy on GitHub Pages
 

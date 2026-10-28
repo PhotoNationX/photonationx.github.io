@@ -8,6 +8,10 @@ export type NavItem = { label: string; href: string };
 
 export type PhotoCategory = { slug: string; title: string };
 
+export type PressLink = { publication: string; title: string; href: string; date?: string };
+
+export type ExternalLink = { label: string; href: string };
+
 export type Site = {
   name: string;
   url: string;
@@ -19,10 +23,16 @@ export type Site = {
     gridPhotos: string[];
   };
   home: { eyebrow: string; heading: string; intro: string };
-  about: { heading: string; paragraphs: string[] };
+  about: {
+    heading: string;
+    paragraphs: string[];
+    press?: PressLink[];
+    links?: ExternalLink[];
+  };
   contact: {
     heading: string;
     intro: string;
+    email?: string;
     web3formsAccessKey: string;
     subject: string;
   };

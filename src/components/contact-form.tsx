@@ -14,7 +14,7 @@ export function ContactForm({ accessKey, subject }: { accessKey: string; subject
   if (!accessKey) {
     return (
       <p className="rounded-lg bg-brand-sky/45 px-4 py-5 text-sm text-foreground">
-        The contact form is not available yet. Please check back soon.
+        The message form is not connected yet. Email is the best way to reach Photo NationX in the meantime.
       </p>
     );
   }
