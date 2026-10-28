@@ -21,7 +21,11 @@ export default function ContactPage() {
           </a>
         </p>
       ) : null}
-      <ContactForm accessKey={contactAccessKey()} subject={site.contact.subject} />
+      <ContactForm
+        accessKey={contactAccessKey()}
+        email={site.contact.email ?? ""}
+        subject={site.contact.subject}
+      />
     </PageShell>
   );
 }
