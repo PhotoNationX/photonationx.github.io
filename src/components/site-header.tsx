@@ -53,7 +53,7 @@ export function SiteHeader({
         <NavigationMenu viewport={false} className="ml-2 hidden max-w-none md:flex">
           <NavigationMenuList className="gap-1">
             {nav.map((item) =>
-              isPhotosHref(item.href) && categories.length > 0 ? (
+              isPhotosHref(item.href) ? (
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuTrigger className={navClass(isActive(item.href, pathname))}>
                     {item.label}
@@ -106,8 +106,17 @@ export function SiteHeader({
                       {item.label}
                     </Link>
                   </SheetClose>
-                  {isPhotosHref(item.href)
-                    ? categories.map((category) => (
+                  {isPhotosHref(item.href) ? (
+                    <>
+                      <SheetClose asChild>
+                        <Link
+                          href="/photos/"
+                          className={cn(mobileClass(normalize(pathname) === "/photos"), "pl-8 text-sm")}
+                        >
+                          All photos
+                        </Link>
+                      </SheetClose>
+                      {categories.map((category) => (
                         <SheetClose asChild key={category.slug}>
                           <Link
                             href={`/photos/${category.slug}/`}
@@ -116,8 +125,9 @@ export function SiteHeader({
                             {category.title}
                           </Link>
                         </SheetClose>
-                      ))
-                    : null}
+                      ))}
+                    </>
+                  ) : null}
                 </div>
               ))}
             </nav>

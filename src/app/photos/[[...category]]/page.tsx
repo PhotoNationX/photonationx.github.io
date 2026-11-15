@@ -9,6 +9,7 @@ import { cn } from "cn";
 export function generateStaticParams() {
   return [
     { category: [] as string[] },
+    { category: ["all"] },
     ...getSite().photoCategories.map((category) => ({ category: [category.slug] })),
   ];
 }
@@ -21,8 +22,8 @@ export async function generateMetadata({
   const { category } = await params;
   const slug = category?.[0];
   const site = getSite();
-  if (!slug) {
-    return { title: "Photos", description: `Photographs by ${site.name}.` };
+  if (!slug || slug === "all") {
+    return { title: "All photos", description: `Photographs by ${site.name}.` };
   }
   const match = categoryBySlug(slug);
   if (!match) return { title: "Photos" };
@@ -37,12 +38,13 @@ export default async function PhotosPage({
   const { category } = await params;
   if (category && category.length > 1) notFound();
   const slug = category?.[0];
-  const match = slug ? categoryBySlug(slug) : undefined;
-  if (slug && !match) notFound();
+  const showingAll = !slug || slug === "all";
+  const match = showingAll ? undefined : categoryBySlug(slug);
+  if (!showingAll && !match) notFound();
 
   const site = getSite();
-  const photos = getPhotosByCategory(slug);
-  const title = match?.title ?? "Photos";
+  const photos = getPhotosByCategory(showingAll ? undefined : slug);
+  const title = match?.title ?? "All photos";
 
   return (
     <PageShell>
@@ -51,18 +53,16 @@ export default async function PhotosPage({
         title={title}
         lede={photos.length > 0 ? "Select a photograph to view it larger." : undefined}
       />
-      {site.photoCategories.length > 0 ? (
-        <nav className="mb-6 flex flex-wrap gap-2" aria-label="Photo categories">
-          <CategoryLink href="/photos/" active={!slug}>
-            All photos
+      <nav className="mb-6 flex flex-wrap gap-2" aria-label="Photo categories">
+        <CategoryLink href="/photos/" active={showingAll}>
+          All photos
+        </CategoryLink>
+        {site.photoCategories.map((item) => (
+          <CategoryLink key={item.slug} href={`/photos/${item.slug}/`} active={item.slug === slug}>
+            {item.title}
           </CategoryLink>
-          {site.photoCategories.map((item) => (
-            <CategoryLink key={item.slug} href={`/photos/${item.slug}/`} active={item.slug === slug}>
-              {item.title}
-            </CategoryLink>
-          ))}
-        </nav>
-      ) : null}
+        ))}
+      </nav>
       {photos.length > 0 ? (
         <PhotoGrid photos={photos} aspect={tileAspect(site.display.photoTileAspect)} />
       ) : (

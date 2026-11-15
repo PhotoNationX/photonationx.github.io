@@ -131,7 +131,8 @@ export function getVideos(): Video[] {
 
 export function getPhotosByCategory(slug?: string): Photo[] {
   const photos = getPhotos();
-  if (!slug) return photos;
+  // All photos is the whole gallery. A photo with no category still belongs here.
+  if (!slug || slug === "all") return photos;
   return photos.filter((photo) => photo.category === slug);
 }
 
