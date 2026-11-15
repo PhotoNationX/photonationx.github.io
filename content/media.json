@@ -2,20 +2,6 @@
   "version": 1,
   "photos": [
     {
-      "id": "21ad8daa902c",
-      "width": 2048,
-      "height": 881,
-      "widths": [
-        400,
-        800,
-        1200,
-        1600,
-        2048
-      ],
-      "color": "#181818",
-      "source": "upload"
-    },
-    {
       "id": "5ce419de3c9c",
       "width": 1440,
       "height": 904,
@@ -1573,6 +1559,20 @@
       ],
       "color": "#080808",
       "source": "instagram"
+    },
+    {
+      "id": "21ad8daa902c",
+      "width": 2048,
+      "height": 881,
+      "widths": [
+        400,
+        800,
+        1200,
+        1600,
+        2048
+      ],
+      "color": "#181818",
+      "source": "upload"
     },
     {
       "id": "9cfde4f88e47",
