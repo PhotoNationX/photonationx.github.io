@@ -5,8 +5,7 @@ import { largestWidth, photoSrc, srcSet, withBasePath } from "@/lib/media";
 /**
  * Opening banner. `banner.style` in content/site.json:
  * - collage: the supplied collage, cropped and sized by `npm run brand`
- * - grid: up to eight original photos around the logo, so the collage can
- *   later be rebuilt from the gallery without changing this component
+ * - grid: five gallery photos around the logo, in the reference collage order
  */
 export function HomeBanner() {
   const site = getSite();
@@ -41,17 +40,24 @@ function GridBanner({ alt, photos }: { alt: string; photos: Photo[] }) {
   const brand = getBrand();
   const sources = logoSources(site.header.logo);
   const largest = sources[sources.length - 1];
-  const filled = Array.from({ length: 8 }, (_, index) => photos[index % photos.length]);
-  const cells: Array<Photo | null> = [...filled.slice(0, 4), null, ...filled.slice(4)];
+  // Two rows. The logo is the top-center cell: yacht, logo, two women, then the row below.
+  const cells: Array<Photo | null> = [
+    photos[0] ?? null,
+    null,
+    photos[1] ?? null,
+    photos[2] ?? null,
+    photos[3] ?? null,
+    photos[4] ?? null,
+  ];
 
   return (
     <section className="bg-[#080808]" aria-label={alt}>
-      {/* 3/2 matches these photographs, so the crop does not cut faces. */}
+      {/* 3/2 is the frame of these photographs, so the header shows each one whole. */}
       <div className="mx-auto grid w-full max-w-[1125px] grid-cols-3">
         {cells.map((photo, index) =>
           photo ? (
             <img
-              key={`${photo.id}-${index}`}
+              key={photo.id}
               src={photoSrc(photo.id, largestWidth(photo.widths))}
               alt=""
               width={photo.width}
@@ -59,14 +65,14 @@ function GridBanner({ alt, photos }: { alt: string; photos: Photo[] }) {
               className="aspect-[3/2] h-full w-full object-cover object-center"
             />
           ) : (
-            <div key="logo" className="flex aspect-[3/2] items-center justify-center bg-[#080808] p-3 sm:p-5">
+            <div key={`logo-${index}`} className="flex aspect-[3/2] items-center justify-center bg-[#080808] p-3 sm:p-5">
               <img
                 src={withBasePath(largest.src)}
                 srcSet={srcSet(sources)}
                 sizes="30vw"
                 width={brand.logo.width}
                 height={brand.logo.height}
-                alt={site.name}
+                alt={index === 1 ? site.name : ""}
                 className="h-auto w-full"
               />
             </div>

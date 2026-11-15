@@ -10,7 +10,8 @@ export default function HomePage() {
   const site = getSite();
   const photos = getPhotos();
   const videos = getVideos();
-  const recentPhotos = photos.slice(0, 8);
+  // The wide SENIOR landscape stays on the Photos page. It is not part of the home header or this strip.
+  const recentPhotos = photos.filter((photo) => photo.width / photo.height < 2).slice(0, 8);
   const recentVideos = videos.slice(0, 4);
   const samples = isSampleContent([...photos, ...videos]);
 
