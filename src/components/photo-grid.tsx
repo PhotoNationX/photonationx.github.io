@@ -31,23 +31,32 @@ export function PhotoGrid({ photos, aspect = "4 / 5" }: { photos: Photo[]; aspec
   return (
     <>
       <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 md:gap-2">
-        {photos.map((photo, photoIndex) => (
-          <li key={photo.id}>
+        {photos.map((photo, photoIndex) => {
+          const panoramic = photo.width / photo.height >= 2;
+          return (
+          <li key={photo.id} className={panoramic ? "col-span-full" : undefined}>
             <button
               type="button"
               onClick={() => setIndex(photoIndex)}
               className="group block w-full overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
-              style={{ backgroundColor: photo.color, aspectRatio: aspect }}
+              style={{
+                backgroundColor: photo.color,
+                aspectRatio: panoramic ? `${photo.width} / ${photo.height}` : aspect,
+              }}
             >
               <img
                 src={photoSrc(photo.id, photo.widths[0])}
                 srcSet={photoSrcSet(photo)}
-                sizes="(min-width: 768px) 25vw, 50vw"
+                sizes={panoramic ? "100vw" : "(min-width: 768px) 25vw, 50vw"}
                 alt={photoLabel(photo)}
                 width={photo.width}
                 height={photo.height}
                 loading="lazy"
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                className={
+                  panoramic
+                    ? "h-full w-full object-contain"
+                    : "h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                }
               />
             </button>
             {photo.caption || photo.date ? (
@@ -56,7 +65,8 @@ export function PhotoGrid({ photos, aspect = "4 / 5" }: { photos: Photo[]; aspec
               </p>
             ) : null}
           </li>
-        ))}
+          );
+        })}
       </ul>
       <Lightbox
         open={index >= 0}
