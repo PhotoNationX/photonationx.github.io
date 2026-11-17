@@ -9,10 +9,45 @@ import "yet-another-react-lightbox/plugins/captions.css";
 import type { Photo } from "@/lib/content";
 import { largestWidth, photoLabel, photoSrc, photoSrcSet } from "@/lib/media";
 
+// 2, 3, and 4 columns (phone, tablet, desktop) all divide 12. A wide photo
+// has to start on that boundary or the row above it is left with empty cells.
+const WIDE_ROW = 12;
+const ROW_AFTER_WIDE = 4;
+
+function isWide(photo: Photo): boolean {
+  return photo.width / photo.height >= 2;
+}
+
+export function arrangeGallery(photos: Photo[]): Photo[] {
+  const pending = photos.slice();
+  const result: Photo[] = [];
+  while (pending.length > 0) {
+    const photo = pending.shift();
+    if (!photo) break;
+    if (!isWide(photo)) {
+      result.push(photo);
+      continue;
+    }
+    const remainder = result.length % WIDE_ROW;
+    const stragglers = remainder === 0 ? [] : result.splice(result.length - remainder, remainder);
+    result.push(photo);
+    let glued = 0;
+    while (glued < ROW_AFTER_WIDE && pending[0] && !isWide(pending[0])) {
+      const next = pending.shift();
+      if (!next) break;
+      result.push(next);
+      glued += 1;
+    }
+    result.push(...stragglers);
+  }
+  return result;
+}
+
 export function PhotoGrid({ photos, aspect = "4 / 5" }: { photos: Photo[]; aspect?: string }) {
+  const arranged = arrangeGallery(photos);
   const [index, setIndex] = useState(-1);
-  const described = photos.some((photo) => photo.caption || photo.date);
-  const slides = photos.map((photo) => {
+  const described = arranged.some((photo) => photo.caption || photo.date);
+  const slides = arranged.map((photo) => {
     const text = [photo.caption, photo.date].filter(Boolean).join(" · ");
     return {
       src: photoSrc(photo.id, largestWidth(photo.widths)),
@@ -31,7 +66,7 @@ export function PhotoGrid({ photos, aspect = "4 / 5" }: { photos: Photo[]; aspec
   return (
     <>
       <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4 md:gap-2">
-        {photos.map((photo, photoIndex) => {
+        {arranged.map((photo, photoIndex) => {
           const panoramic = photo.width / photo.height >= 2;
           return (
           <li key={photo.id} className={panoramic ? "col-span-full" : undefined}>
